@@ -12,31 +12,38 @@
 const inquirer = require("inquirer");
 const { Octokit } = require("@octokit/core");
 
-async function logic(pat) {
-    try {
-        const octokit = new Octokit({ auth: pat });
-        const { data } = await octokit.request(`GET /user/starred`);
-        if (Array.isArray(data) && data.length !== 0) {
-            data.forEach(async (item) => {
-                await octokit.request("DELETE /user/starred/{owner}/{repo}", {
-                    owner: item.owner.login,
-                    repo: item.name,
-                });
+async function unstarRepositories(pat, repositories) {
+    const octokit = new Octokit({ auth: pat });
+
+    for (const repo of repositories) {
+        try {
+            await octokit.request("DELETE /user/starred/{owner}/{repo}", {
+                owner: repo.owner.login,
+                repo: repo.name,
             });
-            return true;
+            console.log(`Unstarred: ${repo.owner.login}/${repo.name}`);
+        } catch (deleteErr) {
+            if (deleteErr.status === 404) {
+                console.error(`Repository ${repo.owner.login}/${repo.name} not found or inaccessible.`);
+            } else {
+                console.error(`Failed to unstar ${repo.owner.login}/${repo.name}:`, deleteErr.message);
+            }
         }
-        return false;
-    } catch (err) {
-        console.log(err);
-        return null;
     }
 }
 
 async function unstarPlease(pat) {
-    let ran = await logic(pat);
-    while (ran) {
-        if (!ran) return;
-        ran = await logic(pat);
+    try {
+        const octokit = new Octokit({ auth: pat });
+        const { data } = await octokit.request(`GET /user/starred`);
+
+        if (Array.isArray(data) && data.length !== 0) {
+            await unstarRepositories(pat, data);
+        } else {
+            console.log("No repositories to unstar.");
+        }
+    } catch (err) {
+        console.error(err);
     }
 }
 
