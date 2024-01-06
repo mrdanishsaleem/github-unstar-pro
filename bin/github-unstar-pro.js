@@ -10,12 +10,11 @@
 "use strict";
 
 const { Octokit } = require("@octokit/core");
+const readline = require("readline");
 
-const PAT = process.env.GITHUB_PAT || "YOUR_PERSONAL_ACCESS_TOKEN_HERE"; // Use environment variable or set your PAT here
-
-async function logic() {
+async function logic(token) {
     try {
-        const octokit = new Octokit({ auth: PAT });
+        const octokit = new Octokit({ auth: token });
         const { data } = await octokit.request(`GET /user/starred`);
         if (Array.isArray(data) && data.length !== 0) {
             for (const item of data) {
@@ -43,11 +42,31 @@ async function logic() {
     }
 }
 
+async function promptForToken() {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    return new Promise((resolve) => {
+        rl.question("Please enter your Personal Access Token: ", (token) => {
+            rl.close();
+            resolve(token);
+        });
+    });
+}
+
 async function unstarPlease() {
-    let ran = await logic();
+    const token = await promptForToken();
+    if (!token) {
+        console.log("Token not provided. Exiting...");
+        return;
+    }
+
+    let ran = await logic(token);
     while (ran) {
         if (!ran) return;
-        ran = await logic();
+        ran = await logic(token);
     }
 }
 
