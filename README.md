@@ -19,4 +19,4 @@ Run the command:
 github-unstar-pro
 ```
 
-Follow the prompts to enter your personal access token generated from your [GitHub account](https://github.com/settings/tokens). In a few moments, all your starred repositories will be unstarred. If you have a large number of starred projects, rerun the command as needed due to GitHub API limitations.
+Follow the prompts to enter your personal access token generated from your GitHub account. You can generate a personal access token [here](https://github.com/settings/tokens) and make sure to select repo as scope. Once entered, the tool will swiftly unstar all your repositories. For larger collections of starred projects, you may need to rerun the command due to GitHub API limitations.
