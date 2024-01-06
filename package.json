@@ -1,0 +1,13 @@
+{
+    "name": "github-unstar-pro",
+    "version": "1.0.0",
+    "description": "CLI tool to unstar GitHub repositories",
+    "bin": {
+        "github-unstar-pro": "./bin/github-unstar-pro.js"
+    },
+    "dependencies": {
+        "@octokit/core": "^3.5.1"
+    },
+    "author": "Danish Saleem",
+    "license": "MIT"
+}
