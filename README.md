@@ -1,34 +1,22 @@
 # GitHub Unstar Pro
 
-When I created an account on GitHub, I unconsciously starred gazillion repositories. Over the years, I realised the number has accumulated into thousands.
+This command-line tool simplifies unstar-ing GitHub repositories in bulk. If you've accumulated a multitude of starred repositories over time and want to clean them up effortlessly, this tool is for you.
 
-There is no easy way to unstar them. It takes manual labor to click through each repository and unstar it. To add to your frustration, there is a pagination in place. You can only unstar few items at once, then you have to paginate. Annoying, isn't it?
+## Why GitHub Unstar Pro?
 
-Over time, you will grow as a developer and all these starred repositories make no sense to you. You would prefer to keep this to bookmark certain repositories that you use on a daily basis.
-
-Over past year, I tried many different projects that other created to unstar my repositories. All of them were outdated. Some used Ruby, Python etc. which I am not familiar with enough. Some used older API endpoint which makes them useless.
-
-I went through Github API documentation, always found it hard to track down this specific issue. This weekend, I sit down and explored their API documentation with clear mind again. Wolla, I see a light at the end of the tunnel.
-
-How do I solve this problem?
-
-Come to your resuce in 2021, `npm i -g github-unstar`.
-
-Run the command using `github-unstar`. It will ask for your personal access token. Generate that in GitHub account for one time usage. Make sure to check all privileges while generating the token.
-
-In few seconds, all your starred mess will be taken care of. Mind you if you have starred projects in range of 10k+, you may need to run this command few times again because Github API has maximum limit for each loop I run. If that happens, wait for a minute, and rerun the `github-unstar` command again.
-
-## Install
-
-- `npm i -g github-unstar`
-- `yarn global add github-unstar`
+When dealing with an extensive list of starred repositories, manually unstar-ing each one can be tedious. Many existing solutions are outdated or require unfamiliar languages. GitHub Unstar Pro streamlines this process using the latest GitHub API.
 
 ## Usage
 
-```js
-github-unstar;
+Install the tool globally via npm or yarn:
+
+- `npm i -g github-unstar-pro`
+- `yarn global add github-unstar-pro`
+
+Run the command:
+
+```bash
+github-unstar-pro
 ```
 
-## Does it even work?
-
-See my own account for proof. I had 1K+ stars prior to Dec 3, 2021. Check it now.
+Follow the prompts to enter your personal access token generated from your [GitHub account](https://github.com/settings/tokens). In a few moments, all your starred repositories will be unstarred. If you have a large number of starred projects, rerun the command as needed due to GitHub API limitations.
