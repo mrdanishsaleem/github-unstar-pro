@@ -1,6 +1,6 @@
 {
     "name": "github-unstar-pro",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Unstar all Github repositories using a personal access token",
     "main": "index.js",
     "repository": "mrdanishsaleem/github-unstar-pro",
