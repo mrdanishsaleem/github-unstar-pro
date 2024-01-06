@@ -9,12 +9,12 @@
 
 "use strict";
 
+const inquirer = require("inquirer");
 const { Octokit } = require("@octokit/core");
-const readline = require("readline");
 
-async function logic(token) {
+async function logic(pat) {
     try {
-        const octokit = new Octokit({ auth: token });
+        const octokit = new Octokit({ auth: pat });
         const { data } = await octokit.request(`GET /user/starred`);
         if (Array.isArray(data) && data.length !== 0) {
             for (const item of data) {
@@ -42,32 +42,31 @@ async function logic(token) {
     }
 }
 
-async function promptForToken() {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-
-    return new Promise((resolve) => {
-        rl.question("Please enter your Personal Access Token: ", (token) => {
-            rl.close();
-            resolve(token);
-        });
-    });
-}
-
-async function unstarPlease() {
-    const token = await promptForToken();
-    if (!token) {
-        console.log("Token not provided. Exiting...");
+async function unstarPlease(pat) {
+    if (!pat) {
+        console.log("No token provided. Exiting...");
         return;
     }
 
-    let ran = await logic(token);
+    let ran = true;
     while (ran) {
-        if (!ran) return;
-        ran = await logic(token);
+        ran = await logic(pat);
     }
 }
 
-unstarPlease();
+inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "pat",
+            message: "Please enter your Personal access token:",
+            default: "",
+        },
+    ])
+    .then(function ({ pat }) {
+        unstarPlease(pat);
+    })
+    .catch(function (error) {
+        if (error.isTtyError) console.error(error.isTtyError, error);
+        console.error(error);
+    });
