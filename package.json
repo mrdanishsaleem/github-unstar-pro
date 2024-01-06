@@ -10,7 +10,7 @@
     "author": "Danish Saleem",
     "license": "ISC",
     "bin": {
-        "github-unstar": "./index.js"
+        "github-unstar-pro": "./index.js"
     },
     "keywords": [
         "node"
