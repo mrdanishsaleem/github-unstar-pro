@@ -1,6 +1,6 @@
 # GitHub Unstar Pro
 
-This command-line tool simplifies unstar-ing GitHub repositories in bulk. If you've accumulated a multitude of starred repositories over time and want to clean them up effortlessly, this tool is for you.
+This command-line tool simplifies unstar-ing GitHub repositories in bulk. If you've accumulated a multitude of starred repositories over time and want to clean them up effortlessly, this tool is for you. You can check this [here](https://www.npmjs.com/package/github-unstar-pro).
 
 ## Why GitHub Unstar Pro?
 
