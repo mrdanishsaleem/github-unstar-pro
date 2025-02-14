@@ -19,7 +19,7 @@
         "index.js"
     ],
     "dependencies": {
-        "@octokit/core": "^3.5.1",
+        "@octokit/core": "^6.1.4",
         "inquirer": "^8.2.0"
     },
     "devDependencies": {}
